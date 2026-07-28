@@ -161,6 +161,21 @@ section .lede{
 .grid .card:nth-child(even){transform:rotate(.6deg);}
 .grid .card:hover{transform:rotate(0deg) translateY(-3px);transition:transform .2s;}
 
+.template-split{margin:14px 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.split-pill{
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:5px 10px;
+  border-radius:999px;
+}
+.split-pill.must{background:var(--story);color:#fff;}
+.split-pill.optional{background:var(--tape);color:var(--ink);}
+.split-note{font-size:12.5px;color:#C9C3B5;}
+.grid.must-have .card{border-top:4px solid var(--story);}
+.grid.optional .card{border-top:4px solid var(--tape);}
+
 /* Template box */
 .template{
   font-family:'Space Mono',monospace;
@@ -207,6 +222,19 @@ section .lede{
 .flip-hint{
   text-align:center;font-family:'Space Mono',monospace;font-size:11px;margin-top:8px;color:#9C9686;
 }
+
+.fix-expand{margin-top:14px;display:none;}
+.fix-expand.allowed{display:block;}
+.fix-expand summary{
+  cursor:pointer;
+  font-family:'Space Mono',monospace;
+  font-size:14px;
+  font-weight:700;
+  list-style:none;
+}
+.fix-expand summary::-webkit-details-marker{display:none;}
+.fix-expand summary::after{content:' +';color:var(--ink-soft);}
+.fix-expand[open] summary::after{content:' -';}
 
 /* 3 C's strip */
 .ccc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;}
@@ -299,51 +327,74 @@ details.inv[open] summary .arrow{transform:rotate(90deg);}
     </div>
 
     <div class="grid">
-      <div class="card"><h3>Sized to a Value Stream</h3><p>Spans an ART and usually more than one PI — never sized to fit one team's backlog.</p></div>
-      <div class="card"><h3>One Epic Owner</h3><p>A single accountable person can answer "why does this exist" end-to-end.</p></div>
-      <div class="card"><h3>Lean Business Case</h3><p>Attached before it leaves the "Analyzing" state of the Portfolio Kanban — not approved on opinion.</p></div>
-      <div class="card"><h3>Hypothesis, not a spec</h3><p>Written to be proven or disproven, not as a locked list of requirements.</p></div>
-      <div class="card"><h3>MVP defined</h3><p>The smallest slice that validates the hypothesis before the epic gets full investment.</p></div>
+      <div class="card"><h3>End-to-End Flow</h3><p>Big enough to improve a full business flow across multiple teams, not just one team's to-do list.</p></div>
+      <div class="card"><h3>Single Owner</h3><p>One named leader is accountable for the result and can clearly explain why this epic matters.</p></div>
+      <div class="card"><h3>Evidence-Backed Case</h3><p>Decision is based on facts, expected outcomes, and business impact, not opinions alone.</p></div>
+      <div class="card"><h3>Testable Idea</h3><p>Frame it as an idea to validate with measurable outcomes, not a fixed list of features.</p></div>
+      <div class="card"><h3>Smallest First Release</h3><p>Define the smallest version that can prove value early before committing full funding.</p></div>
     </div>
 
     <div class="template">
-      For <span class="blank">target customer</span> who <span class="blank">has this need</span>,<br>
-      the <span class="blank">epic name</span> is a <span class="blank">solution category</span><br>
-      that <span class="blank">key benefit</span>.<br>
-      Unlike <span class="blank">current state / alternative</span>,<br>
-      our solution <span class="blank">key differentiator</span>.
+      For <span class="blank">customer group</span> who need <span class="blank">this improvement</span>,<br>
+      <span class="blank">epic name</span> is a <span class="blank">type of solution</span><br>
+      that helps them <span class="blank">get this benefit</span>.<br>
+      Compared with <span class="blank">how work is done today</span>,<br>
+      this solution <span class="blank">is better because</span>.
     </div>
 
     <div class="flip-row">
-      <div class="flipcard" onclick="this.classList.toggle('flipped')">
+      <div class="flipcard" onclick="toggleEpicFlip(this)">
         <div class="flipcard-inner">
           <div class="flip-face flip-front">
             <div class="flabel">✕ Weak epic</div>
-            <p>"Improve our planning process." No customer named, no problem stated, no way to know when it's done.</p>
+            <p>"Access rights to MS Dynamics should be managed centrally. In our org, application access is managed in oneIDM, which holds personnel data for new user registration. In oneIDM, requests are received to grant and revoke access for onboarding/offboarding. Roles can be requested for additional licenses or extra data/function access. IDM roles should clearly show what they grant and be simple to request." Useful context, but still broad, solution-heavy, and not measurable.</p>
           </div>
           <div class="flip-face flip-back">
             <div class="flabel">✓ Strong epic</div>
-            <p>"For supply and demand planners who juggle disconnected forecast, production and inventory plans across separate tools, End-to-End Planning is an integrated planning view connecting demand through to fulfillment. Unlike today's siloed spreadsheets, it lets planners see the full plan-to-fulfillment chain and react to changes in real time."</p>
+            <p>"For application requesters, line managers, and IT access admins who need controlled MS Dynamics access, Centralized Dynamics Access Management in oneIDM is a role-based access process for baseline onboarding/offboarding and approved add-on roles that makes requests clearer, faster, and auditable. Compared with today's mixed role definitions and manual clarifications, it targets 95% role-request clarity, 30% faster approval cycle time, and 100% traceable grant/revoke history in the first PI."</p>
           </div>
         </div>
       </div>
       <p class="flip-hint">tap the card to flip</p>
     </div>
 
+    <details class="card fix-expand" id="epicFixes">
+      <summary>What the strong example fixed</summary>
+      <ul>
+        <li><b>Named the real actors:</b> requesters, managers, and IT access admins.</li>
+        <li><b>Clarified scope:</b> baseline onboarding/offboarding plus approved add-on roles.</li>
+        <li><b>Shifted from solution dump to value:</b> clearer requests, faster approvals, auditable access.</li>
+        <li><b>Added measurable outcomes:</b> clarity, cycle time, and audit traceability targets.</li>
+      </ul>
+    </details>
+
     <div class="section-head" style="margin-top:46px;">
       <h2>Epic Template</h2>
+      <p class="lede">Fill the Must-have cards first to define a usable epic, then complete Optional cards as details mature.</p>
     </div>
-    <div class="grid">
+
+    <div class="template-split">
+      <span class="split-pill must">Must-have first</span>
+      <span class="split-note">Needed before splitting cleanly into stories</span>
+    </div>
+    <div class="grid must-have">
       <div class="card"><h3>1. Description</h3><p>"As an [role], I want [capability], so that [benefit]" — one sentence naming the need, not the solution.</p></div>
       <div class="card"><h3>2. Problem Statement / Status Quo</h3><p>Today's pain and why it matters now — grounds the epic before anyone starts designing.</p></div>
-      <div class="card"><h3>3. Process Visualization</h3><p>Link to the current or target process diagram so readers see where this epic fits end-to-end.</p></div>
       <div class="card"><h3>4. User Impact</h3><p>Names the real personas affected and how their day-to-day work changes — not a generic "users."</p></div>
-      <div class="card"><h3>5. Requirements</h3><p>Bullets on what the solution must support, each independently checkable. What, not how.</p></div>
       <div class="card"><h3>6. Business Value</h3><p>Why it matters to the business — tied to a measurable outcome or strategic driver.</p></div>
-      <div class="card"><h3>7. Notes / Open Questions</h3><p>Stakeholder Q&A captured as it's resolved — keeps decisions traceable instead of re-litigated later.</p></div>
       <div class="card"><h3>8. Out of Scope</h3><p>Explicitly lists what this epic will <i>not</i> cover, with links to the epics that do.</p></div>
       <div class="card"><h3>9. Dependencies</h3><p>Names the upstream systems, teams, or master data this epic relies on.</p></div>
       <div class="card"><h3>10. Proposed Story Split</h3><p>A rough first cut of stories — a planning placeholder, deleted once real stories are created.</p></div>
+    </div>
+
+    <div class="template-split" style="margin-top:18px;">
+      <span class="split-pill optional">Optional later</span>
+      <span class="split-note">Add when implementation details and supporting artifacts are ready</span>
+    </div>
+    <div class="grid optional">
+      <div class="card"><h3>3. Process Visualization</h3><p>Link to the current or target process diagram so readers see where this epic fits end-to-end.</p></div>
+      <div class="card"><h3>5. Requirements</h3><p>Bullets on what the solution must support, each independently checkable. What, not how.</p></div>
+      <div class="card"><h3>7. Notes / Open Questions</h3><p>Stakeholder Q&A captured as it's resolved — keeps decisions traceable instead of re-litigated later.</p></div>
       <div class="card"><h3>11. Solution Design</h3><p>Links to the capability doc, solution design, and CoP approval — pointers, not duplicated content.</p></div>
       <div class="card"><h3>12. How Might It Be Implemented</h3><p>The high-level technical approach agreed with architecture — enough to estimate, not a full design.</p></div>
       <div class="card"><h3>13. Effort (Design / Build / Test)</h3><p>Rough sizing per work type — feeds prioritization.</p></div>
@@ -358,10 +409,11 @@ details.inv[open] summary .arrow{transform:rotate(90deg);}
       <div class="watch-card">
         <h3>Epic smells</h3>
         <ul>
-          <li><b>No named Epic Owner</b> — nobody can answer questions about it.</li>
-          <li><b>Vague title</b> ("Improve platform") with no measurable outcome.</li>
-          <li><b>No Lean Business Case</b> — funded on opinion, not data.</li>
-          <li><b>Bundles unrelated value streams</b> into one epic.</li>
+          <li><b>Untestable hypothesis</b> — epic states expected benefits, but no failure condition or stop criteria.</li>
+          <li><b>Local optimization metrics</b> — success is measured only by internal output (features shipped), not business or user outcomes.</li>
+          <li><b>Hidden dependency mesh</b> — data, security, and process dependencies appear late because they were captured as assumptions.</li>
+          <li><b>Overloaded MVP</b> — "MVP" still contains multiple capabilities that cannot be validated independently.</li>
+          <li><b>Component-based decomposition</b> — stories split by system layers (UI/API/data) instead of end-to-end user value slices.</li>
         </ul>
       </div>
     </div>
@@ -376,42 +428,52 @@ details.inv[open] summary .arrow{transform:rotate(90deg);}
       <div class="section-head">
         <span class="tag story">Team level</span>
         <h2>What makes a good Story</h2>
-        <p class="lede">A small, negotiable slice of value a team can finish inside one iteration — not a task, not a spec.</p>
+        <p class="lede">A story is one small result a team can finish in one iteration and verify with clear acceptance criteria.</p>
       </div>
 
       <div class="template">
-        As a <span class="blank">role / persona</span>,<br>
-        I want <span class="blank">action or capability</span>,<br>
-        so that <span class="blank">benefit / value</span>.
+        As a <span class="blank">specific user role</span>,<br>
+        I want to <span class="blank">do one concrete action</span>,<br>
+        so that <span class="blank">I get one clear benefit</span>.
       </div>
 
       <div class="ccc">
-        <div class="card"><div class="letter">C</div><h3>Card</h3><p>Just enough written down to remember the conversation — not the whole spec.</p></div>
-        <div class="card"><div class="letter">C</div><h3>Conversation</h3><p>Details get worked out by talking with the PO and team, not by writing more on the card.</p></div>
-        <div class="card"><div class="letter">C</div><h3>Confirmation</h3><p>Acceptance criteria the team agrees will prove the story is really done.</p></div>
+        <div class="card"><div class="letter">1</div><h3>Write</h3><p>Write one role, one action, and one benefit. Keep it short.</p></div>
+        <div class="card"><div class="letter">2</div><h3>Discuss</h3><p>Confirm scope with PO and team so it fits one iteration.</p></div>
+        <div class="card"><div class="letter">3</div><h3>Verify</h3><p>Add acceptance criteria everyone can test and agree on.</p></div>
       </div>
 
       <div class="template" style="margin-top:26px;">
-        <b style="color:var(--tape)">Given</b> a returning customer with saved payment info<br>
-        <b style="color:var(--tape)">When</b> they reach checkout<br>
-        <b style="color:var(--tape)">Then</b> payment fields are pre-filled so they can confirm in one tap
+        <b style="color:var(--tape)">Given</b> a line manager submits a oneIDM request for a new MS Dynamics user<br>
+        <b style="color:var(--tape)">When</b> they select the baseline onboarding role<br>
+        <b style="color:var(--tape)">Then</b> role description is clear and the request is routed for approval with audit trace
       </div>
 
       <div class="flip-row">
-        <div class="flipcard" onclick="this.classList.toggle('flipped')">
+        <div class="flipcard" onclick="toggleStoryFlip(this)">
           <div class="flipcard-inner">
             <div class="flip-face flip-front">
               <div class="flabel">✕ Weak story</div>
-              <p>"As a user, I want the backend refactored so the app is faster." Technical work in a user-story costume — no visible value, no acceptance criteria.</p>
+              <p>"As an access requester, I want oneIDM role management for MS Dynamics so onboarding and offboarding are easier." Good direction, but still too broad and not testable.</p>
             </div>
             <div class="flip-face flip-back">
               <div class="flabel">✓ Strong story</div>
-              <p>"As a returning customer, I want my payment details saved, so that I can check out in one tap next time." Paired with the Given/When/Then above.</p>
+              <p>"As a line manager, I want to request the MS Dynamics baseline onboarding role in oneIDM, so that new team members get the right default access on time." Acceptance criteria: role description is visible before submit, request can be completed in 3 minutes or less, and approval/audit trail is recorded.</p>
             </div>
           </div>
         </div>
         <p class="flip-hint">tap the card to flip</p>
       </div>
+
+      <details class="card fix-expand" id="storyFixes">
+        <summary>What the strong story fixed</summary>
+        <ul>
+          <li><b>Narrowed scope:</b> one role request flow, not full access management.</li>
+          <li><b>Named a real persona:</b> line manager, not a generic requester.</li>
+          <li><b>Made value explicit:</b> correct baseline access on time for new joiners.</li>
+          <li><b>Added testable criteria:</b> clarity, cycle time, and audit trail checks.</li>
+        </ul>
+      </details>
     </div>
 
     <!-- INVEST -->
@@ -480,28 +542,6 @@ details.inv[open] summary .arrow{transform:rotate(90deg);}
       </div>
     </div>
 
-    <!-- Ready -->
-    <div id="sub-ready" class="subpanel">
-      <div class="section-head" style="margin-top:46px;">
-        <span class="tag neutral">Before it enters the sprint</span>
-        <h2>Definition of Ready</h2>
-        <p class="lede">The three things a story needs before a team commits to it. Check them off as you go.</p>
-      </div>
-      <div class="checklists">
-        <div class="cl-card" data-checklist>
-          <h3>Definition of Ready</h3>
-          <span class="progress-label">0 / 3 done</span>
-          <div class="progress-wrap"><div class="progress-bar"></div></div>
-          <ul>
-            <li><input type="checkbox"><label>Written as "As a / I want / so that" (or Enabler equivalent), with acceptance criteria agreed with the Product Owner</label></li>
-            <li><input type="checkbox"><label>Small enough to finish in one iteration, with no blocking dependencies</label></li>
-            <li><input type="checkbox"><label>Team understands the "why" and has no open question it can't answer today</label></li>
-          </ul>
-          <button class="reset-btn" onclick="resetList(this)">Reset</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Watch-outs -->
     <div id="sub-watchouts" class="subpanel">
       <div class="section-head" style="margin-top:46px;">
@@ -513,10 +553,12 @@ details.inv[open] summary .arrow{transform:rotate(90deg);}
         <div class="watch-card">
           <h3>Story smells</h3>
           <ul>
-            <li><b>Technical task in a user-story costume</b> — "As a developer, I want to refactor X." Use an Enabler story instead.</li>
-            <li><b>No acceptance criteria</b>, or criteria written after the sprint starts.</li>
-            <li><b>Still open after 2+ sprints</b> — it needs to be split.</li>
-            <li><b>Blocked on another unfinished story</b> — not independent.</li>
+              <li><b>Looks right, still too big</b> — story format looks correct, but still bundles workflow, policy, and data changes in one item.</li>
+              <li><b>Vague acceptance criteria</b> — words like "intuitive" or "seamless" with no observable pass/fail check.</li>
+              <li><b>Integration checked too late</b> — story is marked done in isolation while dependency contracts remain unverified.</li>
+              <li><b>Missing run-support checks</b> — logging, monitoring, access controls, or rollback expectations are omitted from done criteria.</li>
+              <li><b>Works only with sample data</b> — story passes with happy-path sample data but fails against real production-like scenarios.</li>
+              <li><b>Hidden dependency</b> — external team/system input is phrased as "expected" rather than planned and tracked.</li>
           </ul>
         </div>
       </div>
@@ -551,6 +593,33 @@ function updateProgress(card){
   card.querySelector('.progress-bar').style.width = (total? (done/total*100):0) + '%';
   card.querySelector('.progress-label').textContent = done + ' / ' + total + ' done';
 }
+
+function toggleEpicFlip(card){
+  card.classList.toggle('flipped');
+  const fixes = document.getElementById('epicFixes');
+  if(!fixes) return;
+
+  if(card.classList.contains('flipped')){
+    fixes.classList.add('allowed');
+  }else{
+    fixes.classList.remove('allowed');
+    fixes.open = false;
+  }
+}
+
+function toggleStoryFlip(card){
+  card.classList.toggle('flipped');
+  const fixes = document.getElementById('storyFixes');
+  if(!fixes) return;
+
+  if(card.classList.contains('flipped')){
+    fixes.classList.add('allowed');
+  }else{
+    fixes.classList.remove('allowed');
+    fixes.open = false;
+  }
+}
+
 document.querySelectorAll('[data-checklist]').forEach(card=>{
   card.querySelectorAll('input[type=checkbox]').forEach(cb=>{
     cb.addEventListener('change', ()=>{

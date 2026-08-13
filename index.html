@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epic & Story Writing WBT</title>
+  <style>
+:root {
+  --bg: #1f2a29;
+  --bg-2: #273230;
+  --paper: #f4efe1;
+  --ink: #1f2524;
+  --soft: #57635f;
+  --accent: #d8a63d;
+  --good: #1f7a6c;
+  --line: rgba(31, 37, 36, 0.15);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: radial-gradient(circle at 10% 0%, #32403d, transparent 60%), var(--bg);
+  color: #e9e2d3;
+}
+
+.hero {
+  text-align: center;
+  padding: 36px 20px 18px;
+}
+
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 8px 0 10px;
+  font-size: clamp(28px, 5vw, 44px);
+}
+
+.lede {
+  margin: 0 auto;
+  max-width: 760px;
+  color: #c7c0b1;
+}
+
+.tabs {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 10px 16px 12px;
+  background: linear-gradient(var(--bg), rgba(31, 42, 41, 0.9));
+}
+
+.tabs button {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+  background: #ddd5c4;
+}
+
+.tabs button.active {
+  background: var(--accent);
+}
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 18px 42px;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+h2 {
+  color: #f4efe1;
+  margin-top: 26px;
+}
+
+.small { color: #c7c0b1; }
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input[type="text"] {
+  width: 100%;
+  border: 1px solid #cfc7b5;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.two-col {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.card h3 { margin-top: 0; }
+
+.quiz {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.q {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.q p {
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+.opt {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.actions {
+  margin-top: 14px;
+}
+
+button {
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--good);
+  color: #fff;
+}
+
+.actions button { margin-right: 8px; margin-bottom: 6px; }
+
+#saveSyncSettings,
+#testSyncSettings {
+  background: #365fc2;
+}
+
+.check-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.check-inline label {
+  margin: 0;
+}
+
+
+.result {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.result.ok { color: #7ddfbf; }
+.result.bad { color: #ffb8a9; }
+
+.r-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+
+.r-line label {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.r-line select {
+  min-width: 72px;
+  padding: 4px;
+}
+
+ol, ul { line-height: 1.5; }
+
+@media (max-width: 640px) {
+  .tabs button { width: 100%; }
+}
+  </style>
+  <style>
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 14px; }
+    .module-card { background: var(--paper); color: var(--ink); border-radius: 6px; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .module-card.active { outline: 2px solid var(--good); }
+    .module-card h4 { margin: 0 0 8px; color: var(--good); }
+    .module-card .duration { font-size: 12px; color: #888; margin-bottom: 8px; }
+    .module-card ul { margin: 8px 0; padding-left: 18px; font-size: 13px; }
+    .module-card .key-idea { font-style: italic; background: #f9f7f2; padding: 8px; border-radius: 4px; font-size: 12px; margin-top: 8px; }
+    .module-open-btn { margin-top: 10px; }
+    .module-viewer { margin-top: 16px; border: 1px solid #e6dcc9; border-radius: 8px; background: #fffdf8; padding: 14px; color: var(--ink); }
+    .module-viewer h3 { margin-top: 0; color: var(--ink); }
+    .module-viewer h4 { margin: 14px 0 6px; color: var(--good); font-size: 15px; }
+    .module-viewer .meta { font-size: 13px; color: #666; margin-bottom: 10px; }
+    .module-viewer p, .module-viewer li { color: var(--ink); line-height: 1.55; }
+    .module-viewer ul { margin: 6px 0 10px; padding-left: 20px; }
+    .module-viewer .key-idea { background: #eef7f4; border-left: 4px solid var(--good); padding: 10px; border-radius: 4px; font-style: normal; margin-top: 10px; }
+    .scenario-block { border: 1px solid #d5cab2; border-radius: 6px; background: #fffaf0; padding: 12px; }
+    .scenario-block h5 { margin: 0 0 8px; font-size: 15px; color: #2f4b45; }
+    .scenario-story { border-top: 1px dashed #cdbfa2; margin-top: 10px; padding-top: 10px; }
+    .scenario-story h5 { margin: 0 0 6px; font-size: 14px; color: #2f4b45; }
+    .module-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .explanation-box { background: #fffbf5; padding: 10px; border-left: 4px solid var(--good); margin-top: 8px; font-size: 13px; color: #333; }
+    .guide-embed { border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin: 14px 0; }
+    .guide-link { display: inline-block; background: var(--good); color: white; padding: 12px 20px; border-radius: 4px; text-decoration: none; font-weight: 600; margin-top: 10px; }
+    .guide-link:hover { opacity: 0.9; }
+    .objectives-list { background: var(--paper); padding: 16px; border-radius: 6px; margin: 14px 0; }
+    .objectives-list li { margin: 8px 0; color: var(--ink); }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">EPIC and Story writing web based training</p>
+    <h1>Epic & Story Writing</h1>
+    <p class="lede">Master the art of writing clear, measurable epics and user stories that drive aligned delivery.</p>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="active" data-target="overview">Overview</button>
+    <button data-target="materials">Training Materials</button>
+    <button data-target="modules">Learning Modules</button>
+    <button data-target="assessment">Assessment (15 Q)</button>
+  </nav>
+
+  <main class="wrap">
+    <!-- TAB: OVERVIEW -->
+    <section id="overview" class="panel active">
+      <h2>Training Overview</h2>
+      
+      <article class="card">
+        <h3>What You'll Learn</h3>
+        <p id="trainingFocus"></p>
+      </article>
+
+      <article class="card">
+        <h3>Learning Objectives</h3>
+        <ul class="objectives-list" id="objectivesList"></ul>
+      </article>
+
+      <article class="card">
+        <h3>Expected Outcome</h3>
+        <p id="expectedOutcome"></p>
+      </article>
+
+      <article class="card">
+        <h3>Your Profile</h3>
+        <div class="three-col" id="traineeFields">
+          <div>
+            <label for="traineeName">Your Name</label>
+            <input id="traineeName" type="text" placeholder="Enter your name" />
+          </div>
+          <div>
+            <label for="trainerName">Trainer Name</label>
+            <input id="trainerName" type="text" placeholder="Enter trainer name" />
+          </div>
+          <div>
+            <label for="teamName">Team / Function</label>
+            <input id="teamName" type="text" placeholder="Enter team" />
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>M365 Sync Settings</h3>
+        <p class="small">Optional: send completed records to SharePoint through a Power Automate HTTP webhook.</p>
+        <div>
+          <label for="syncWebhookUrl">Power Automate Webhook URL</label>
+          <input id="syncWebhookUrl" type="text" placeholder="https://prod-xx.westeurope.logic.azure.com/..." />
+        </div>
+        <div class="check-inline" style="margin-top:10px;">
+          <input id="syncAutoEnabled" type="checkbox" />
+          <label for="syncAutoEnabled">Auto-sync records to M365 when completing assessment</label>
+        </div>
+        <div class="actions">
+          <button id="saveSyncSettings" type="button">Save Sync Settings</button>
+          <button id="testSyncSettings" type="button">Test Sync Connection</button>
+        </div>
+        <p id="syncSettingsResult" class="result"></p>
+      </article>
+    </section>
+
+    <!-- TAB: TRAINING MATERIALS -->
+    <section id="materials" class="panel">
+      <h2>Training Materials</h2>
+      <p class="small">Reference the SAFe Epic & Story Field Guide as you work through the modules and assessment.</p>
+      
+      <article class="card">
+        <h3>Field Guide</h3>
+        <p>The <strong>Epic & Story Field Guide</strong> contains:</p>
+        <ul>
+          <li><strong>Epic Template:</strong> Must-have fields (Description, Problem, User Impact, Value, Out of Scope, Dependencies, Story Split) + Optional fields</li>
+          <li><strong>Story Template:</strong> INVEST criteria, acceptance criteria, anti-patterns</li>
+          <li><strong>Weak-to-Strong Examples:</strong> Real-world epics and stories showing what NOT to do vs what TO do</li>
+          <li><strong>Advanced Anti-patterns:</strong> 12+ signals of hidden risks in epic-story hierarchies</li>
+          <li><strong>Domain Examples:</strong> oneIDM and MS Dynamics baseline request scenarios</li>
+        </ul>
+        <a href="https://sagar9595-git.github.io/Guides/SAFe_Epic_Story_Field_Guide.html" target="_blank" class="guide-link">📖 Open Field Guide in New Tab</a>
+        <p style="font-size:12px; color:#888; margin-top:10px;"><em>Tip: Open this in another browser tab so you can reference it while taking the assessment.</em></p>
+      </article>
+
+      <article class="card">
+        <h3>Quick Reference: INVEST Principles</h3>
+        <table style="width:100%; border-collapse: collapse;">
+          <tr style="border-bottom: 1px solid #ddd;">
+            <td style="padding:8px; font-weight:bold; width:30%;">I = Independent</td>
+            <td style="padding:8px;">Can be completed without completing other stories (but aware of dependencies)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #ddd;">
+            <td style="padding:8px; font-weight:bold;">N = Negotiable</td>
+            <td style="padding:8px;">Details can be negotiated with product owner; not over-specified</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #ddd;">
+            <td style="padding:8px; font-weight:bold;">V = Valuable</td>
+            <td style="padding:8px;">Delivers clear business value to a specific user/segment</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #ddd;">
+            <td style="padding:8px; font-weight:bold;">E = Estimable</td>
+            <td style="padding:8px;">Team can estimate the effort (dev, QA, design)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #ddd;">
+            <td style="padding:8px; font-weight:bold;">S = Small</td>
+            <td style="padding:8px;">Completable within one iteration (typically 1-3 days)</td>
+          </tr>
+          <tr>
+            <td style="padding:8px; font-weight:bold;">T = Testable</td>
+            <td style="padding:8px;">Acceptance criteria are clear and observable; QA knows how to test</td>
+          </tr>
+        </table>
+      </article>
+
+      <article class="card">
+        <h3>Key Definitions</h3>
+        <div style="margin-top:10px;">
+          <p><strong>Epic:</strong> A large body of work that delivers a measurable business outcome for a specific user segment or organization, completed across multiple iterations.</p>
+          <p><strong>Story:</strong> A small, independent piece of work that delivers value to a specific persona in one iteration, with clear acceptance criteria.</p>
+          <p><strong>Acceptance Criteria:</strong> Testable, observable conditions that must be met for a story to be considered "done." Use plain, outcome-focused statements that describe expected behavior and value.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- TAB: LEARNING MODULES -->
+    <section id="modules" class="panel">
+      <h2>Learning Modules</h2>
+      <p class="small">4 modules covering 60 minutes of content. Review each module before taking the assessment.</p>
+      
+      <div class="module-grid" id="modulesGrid"></div>
+
+      <article class="module-viewer" id="moduleViewer">
+        <h3 id="moduleViewerTitle">Select a module to begin</h3>
+        <p class="meta" id="moduleViewerMeta">Click any module card above to open details.</p>
+        <div id="moduleViewerBody"></div>
+        <div class="module-nav">
+          <button id="prevModuleBtn" type="button">Previous Module</button>
+          <button id="nextModuleBtn" type="button">Next Module</button>
+        </div>
+      </article>
+
+      <article class="card" style="margin-top:20px;">
+        <h3>Study Tips</h3>
+        <ul>
+          <li><strong>Review the weak-to-strong examples</strong> in the Field Guide (flip cards) — pay attention to what changes from weak to strong</li>
+          <li><strong>Read the "What was fixed" sections</strong> — these explain the specific problems and how they were corrected</li>
+          <li><strong>Identify the pattern:</strong> Business outcomes (not features) + specific personas + measurable metrics + clear scope</li>
+          <li><strong>Practice scoring:</strong> Use the rubric to evaluate the examples and internalize the dimensions</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- TAB: ASSESSMENT -->
+    <section id="assessment" class="panel">
+      <h2>Knowledge Assessment</h2>
+      <p class="small">15 questions covering epic foundations, story essentials, splitting, anti-patterns, and acceptance criteria.</p>
+      
+      <form id="assessmentForm" class="quiz"></form>
+
+      <div class="actions">
+        <button id="assessmentSubmit" type="button">Score Assessment</button>
+      </div>
+      <p id="assessmentResult" class="result"></p>
+
+      <article class="card" style="margin-top:20px; display:none;" id="explanationBox">
+        <h3>Question Explanations</h3>
+        <div id="explanationContent"></div>
+      </article>
+    </section>
+
+  </main>
+
+  <script>
+const TRAINING_DATA = {
+  trainingOverview: {
+    title: "Process Delegate Epic & Story Writing",
+    focus: "Enable process delegates to write clear, measurable epics and user stories that drive aligned team delivery",
+    duration: "90 minutes",
+    objectives: [
+      "Distinguish weak from strong epics using measurable business outcomes and persona clarity",
+      "Write stories with INVEST principles: Independent, Negotiable, Valuable, Estimable, Small, Testable",
+      "Apply acceptance criteria that enable testing without ambiguity",
+      "Identify and mitigate advanced anti-patterns in epic-story hierarchies",
+      "Split large stories into independent, deliverable increments"
+    ],
+    expectedOutcome: "Trainees will pass a 15-question assessment (75%+) and score 3.5+ on practical epic/story evaluation"
+  },
+
+  trainingModules: [
+    {
+      id: "m1",
+      title: "Module 1: Epic Foundations",
+      duration: "15 min",
+      topics: ["Business outcomes vs features", "Persona and impact clarity", "Measurable metrics", "Scope boundaries"],
+      keyIdea: "A strong epic articulates WHO benefits, WHAT business outcome is measured, and WHY it matters-not just WHAT to build.",
+      trainingContent: {
+        learningGoals: [
+          "Differentiate output-based epics from outcome-based epics",
+          "Write a one-sentence epic with persona, metric, and timeline",
+          "Define in-scope and out-of-scope boundaries to reduce ambiguity"
+        ],
+        coreConcepts: [
+          "An epic describes a business outcome, not a feature bundle",
+          "Every epic should name who benefits and how success will be measured",
+          "Scope boundaries prevent hidden work and expectation mismatch"
+        ],
+        advancedConcepts: [
+          "Use leading and lagging indicators together: leading metrics show adoption behavior, lagging metrics show business impact",
+          "Define explicit kill criteria for epics that fail to move target metrics after rollout",
+          "Attach constraint assumptions (policy, data quality, identity readiness) to reduce delivery surprise"
+        ],
+        framework: [
+          "Epic formula: For <persona>, improve <metric> from <baseline> to <target> by <date> so that <business impact>",
+          "Boundary statement: In scope <capabilities>; Out of scope <capabilities>"
+        ],
+        weakExample: [
+          "Backlog draft from steering meeting: 'Modernize onboarding and improve user experience for baseline requests across all departments this quarter.'",
+          "Problem: it has no target cohort, no measurable value, no sequencing, and no boundaries."
+        ],
+        strongExample: [
+          "Rewritten epic: For newly appointed process delegates in EMEA operations, reduce baseline request completion time from 4.8 days to 1.5 days by end of Q4.",
+          "Business impact: increase first-30-day delegate autonomy from 52% to 80% and cut support tickets per delegate from 3.1 to 1.0.",
+          "In scope: baseline request wizard, approval SLA notifications, duplicate-request detection. Out of scope: mobile redesign, HR master data migration, and analytics warehouse rebuild."
+        ],
+        whatWasFixed: [
+          "Added a specific persona (new field managers)",
+          "Added measurable metric with baseline and target (5 days to 1 day)",
+          "Added timeframe (by Q4)",
+          "Added explicit scope boundaries"
+        ],
+        realWorldScenario: {
+          title: "Quarter-End Baseline Backlog Spike",
+          background: [
+            "During quarter-end onboarding, 420 baseline requests were submitted in 3 weeks.",
+            "Average end-to-end completion time rose from 2.2 days to 5.4 days and approver queues breached SLA on 37% of requests.",
+            "Trainers observed that first-time delegates used email and spreadsheets as workarounds, causing duplicate submissions."
+          ],
+          weakDraft: "Epic in portfolio board: 'Fix onboarding delays by improving CRM and approvals globally.'",
+          issues: [
+            "No measurable target or baseline reference",
+            "No named user segment, making acceptance subjective",
+            "Bundles global process change and system change in one oversized objective",
+            "No scope boundaries, so teams cannot estimate reliably"
+          ],
+          improvedEpic: "For first-time process delegates in EMEA, reduce baseline request completion time from 5.4 days to 2.0 days by 31-Dec-2026 while decreasing duplicate submissions from 18% to below 5%; in scope: request wizard validation, approver queue prioritization, delegate progress tracking; out of scope: global policy redesign and mobile client refresh.",
+          splitStories: [
+            {
+              title: "Delegate validation before submission",
+              rationale: "Reduces rework and duplicate requests at source.",
+              acceptanceCriteria: [
+                "Block duplicate employee IDs at submission and show the existing request reference so delegates avoid rework.",
+                "Highlight missing required fields within 1 second when submission is attempted with incomplete data.",
+                "When all fields are valid and submitted, set the request to Submitted and start SLA tracking immediately."
+              ]
+            },
+            {
+              title: "Approver queue by SLA breach risk",
+              rationale: "Targets queue bottleneck that drives cycle-time variance.",
+              acceptanceCriteria: [
+                "Sort pending requests by nearest SLA breach so approvers handle the most urgent work first.",
+                "Mark requests with less than 4 hours to SLA as High Risk to prioritize timely decisions.",
+                "After approval or rejection, notify the delegate within 2 minutes so they can act without delay."
+              ]
+            }
+          ],
+          operatingMetrics: [
+            "Cycle time p50 and p90 for first-time delegates",
+            "Duplicate submission rate per 100 requests",
+            "Approver queue SLA breach percentage",
+            "Support tickets per delegate in first 30 days"
+          ]
+        },
+        practiceExercise: [
+          "Select one active epic in your backlog and rewrite it with baseline, target, timeline, and scope boundaries.",
+          "Document one leading metric and one lagging metric for that epic.",
+          "Define a kill criterion: what signal proves the epic is not delivering expected value."
+        ],
+        completionChecklist: [
+          "Persona is explicit",
+          "Business metric is measurable",
+          "Baseline and target are defined",
+          "Timeline is defined",
+          "In-scope and out-of-scope are stated"
+        ]
+      }
+    },
+    {
+      id: "m2",
+      title: "Module 2: Story Essentials",
+      duration: "20 min",
+      topics: ["INVEST principle", "Acceptance criteria clarity", "Story scope (1 iteration)", "Testability"],
+      keyIdea: "A strong story is ONE specific persona action with clear, testable criteria-not a feature list.",
+      trainingContent: {
+        learningGoals: [
+          "Apply INVEST to evaluate story quality",
+          "Write stories that are deliverable in one iteration",
+          "Define acceptance criteria that QA can test independently"
+        ],
+        coreConcepts: [
+          "A story should represent one user action and one core value outcome",
+          "Small and testable stories improve planning accuracy",
+          "Acceptance criteria remove interpretation risk"
+        ],
+        advancedConcepts: [
+          "Design for failure modes: each story should include at least one negative-path criterion",
+          "Use service-level expectations directly in acceptance criteria (response windows, queue behavior, notification latency)",
+          "Keep implementation negotiable while making behavior non-negotiable"
+        ],
+        framework: [
+          "Story format: As a <persona>, I want <action> so that <value>",
+          "Acceptance criteria format: plain statements that describe expected behavior, observable outcomes, and business value."
+        ],
+        weakExample: [
+          "Current sprint candidate: 'Improve request form UX and make it more robust for all users.'",
+          "The team cannot estimate this because UX, validation, and backend consistency are all mixed."
+        ],
+        strongExample: [
+          "Story: As a first-time process delegate, I can complete a baseline request in under 5 minutes using guided field validation so I can submit without trainer support.",
+          "Acceptance focus: completion time, validation behavior, and clear recovery when errors occur."
+        ],
+        whatWasFixed: [
+          "Replaced vague improvement language with a concrete user action",
+          "Named a specific persona",
+          "Made outcome measurable (under 5 minutes)",
+          "Connected work to user value (no support calls)"
+        ],
+        realWorldScenario: {
+          title: "First 2 Weeks Delegate Experience",
+          background: [
+            "New delegates reported confusion on mandatory fields and dependency checks.",
+            "42% of requests failed first submission due to missing manager approval linkage.",
+            "Support team spent 19 hours/week helping delegates resubmit corrected forms."
+          ],
+          weakDraft: "Story in sprint board: 'Improve baseline form and add better guidance for delegates.'",
+          issues: [
+            "No single user action or measurable expected behavior",
+            "No independent test boundary for QA",
+            "Merges UI copy, validation rules, and process logic in one story"
+          ],
+          improvedEpic: "Epic anchor for this stream: improve first-pass submission quality for new delegates from 58% to 85% by end of quarter using guided validation and clearer error recovery.",
+          splitStories: [
+            {
+              title: "Mandatory-field guidance at point of entry",
+              rationale: "Improves completion quality before submit action.",
+              acceptanceCriteria: [
+                "Show format guidance for mandatory fields when no input is provided so delegates complete forms correctly.",
+                "Display a clear correction message when a field violates policy, including what must be fixed.",
+                "Allow delegates to continue to the next step once all mandatory fields are valid."
+              ]
+            },
+            {
+              title: "Manager approval linkage validation",
+              rationale: "Eliminates common reject reason before submission.",
+              acceptanceCriteria: [
+                "Block submission when manager mapping is missing and provide fallback instructions to resolve the issue.",
+                "Submit the request successfully when manager mapping is valid.",
+                "Show a visible, copyable reference ID on confirmation so delegates can track the request."
+              ]
+            }
+          ],
+          operatingMetrics: [
+            "First-pass submission success rate",
+            "Median completion time for first-time delegates",
+            "Support tickets tagged form-validation",
+            "Reject reasons by category"
+          ]
+        },
+        practiceExercise: [
+          "Take one current story and rewrite it with one persona, one action, and one measurable value outcome.",
+          "Add three plain acceptance criteria: happy path, validation failure path, and recovery path.",
+          "Check story against INVEST and note exactly where it fails before rewrite and passes after rewrite."
+        ],
+        completionChecklist: [
+          "One persona and one action",
+          "Clear value statement",
+          "Can be completed in one iteration",
+          "Acceptance criteria are observable and measurable",
+          "No implementation-specific technical prescription"
+        ]
+      }
+    },
+    {
+      id: "m3",
+      title: "Module 3: Story Splitting & Anti-patterns",
+      duration: "15 min",
+      topics: ["Splitting strategies", "Common weak patterns", "Dependencies and risks", "Operational readiness"],
+      keyIdea: "Split by workflow step first, not by architecture. Watch for bundled requests, vague personas, and testability gaps.",
+      trainingContent: {
+        learningGoals: [
+          "Split large stories into independently valuable slices",
+          "Detect anti-patterns that block delivery",
+          "Document dependencies without hiding risk"
+        ],
+        coreConcepts: [
+          "Workflow-step splitting reduces coupling and enables earlier value",
+          "Architecture-layer splitting creates unnecessary dependencies",
+          "Visible risks improve planning and sequencing"
+        ],
+        advancedConcepts: [
+          "Split by decision points in the user journey, not by internal component boundaries",
+          "Use risk-adjusted sequencing: deliver highest uncertainty slices first",
+          "Define rollback and fallback criteria for each slice before release"
+        ],
+        framework: [
+          "Split sequence: user journey step -> happy path -> error path -> role variant",
+          "Risk note: Dependency, impact if blocked, mitigation/workaround"
+        ],
+        weakExample: [
+          "Oversized story in PI planning: 'As a field manager, I can manage team baseline across all regions with approval workflow, audit trail, dashboard, and escalation alerts.'",
+          "This story crossed three teams and failed carry-over twice in prior increments."
+        ],
+        strongExample: [
+          "Restructured into workflow slices: view team baseline -> assign role -> submit for approval -> monitor approval status.",
+          "Each slice includes independent demo value and a release gate."
+        ],
+        whatWasFixed: [
+          "Removed bundled capabilities from one oversized story",
+          "Split by user workflow steps",
+          "Created independently deliverable increments",
+          "Reduced cross-team dependency bottlenecks"
+        ],
+        realWorldScenario: {
+          title: "Multi-Region Baseline Rollout",
+          background: [
+            "Program attempted a single release for EMEA, APAC, and NA baseline workflows.",
+            "APAC required additional compliance checks that delayed entire release by 3 weeks.",
+            "Teams discovered reporting dependencies late because analytics criteria were bundled in the same story."
+          ],
+          weakDraft: "Story proposal: 'Deliver complete baseline management with approvals, escalation, and dashboard for all regions in one sprint.'",
+          issues: [
+            "Combines region policy variants with core workflow delivery",
+            "No isolation of value slices for early feedback",
+            "Hidden dependency on analytics pipeline blocks release readiness"
+          ],
+          improvedEpic: "For regional process managers, deliver baseline management in phased workflow slices so each region can submit and approve requests independently while maintaining local compliance; target first value release in 2 sprints and full regional coverage in 8 sprints.",
+          splitStories: [
+            {
+              title: "Region-agnostic submission flow",
+              rationale: "Delivers core value without waiting for region-specific policy logic.",
+              acceptanceCriteria: [
+                "After baseline submission, place the request in Pending Approval and generate a unique tracking ID.",
+                "Prevent request creation and show validation errors when mandatory data is missing.",
+                "Display region-specific estimated SLA on successful submission confirmation."
+              ]
+            },
+            {
+              title: "Region policy plug-in for APAC",
+              rationale: "Contains compliance variation without blocking other regions.",
+              acceptanceCriteria: [
+                "For APAC requests with restricted roles, require an additional compliance approval step.",
+                "Skip APAC-only compliance checks for non-APAC submissions to reduce unnecessary friction.",
+                "If compliance fails, show the failure reason and remediation guidance in request status."
+              ]
+            }
+          ],
+          operatingMetrics: [
+            "Cycle time by region and workflow step",
+            "Blocked stories due to cross-team dependency",
+            "Release frequency per region",
+            "Escape defects found post release"
+          ]
+        },
+        practiceExercise: [
+          "Pick one large story and map the user journey in 4-6 steps.",
+          "Split into minimum two independently releasable slices with separate acceptance criteria.",
+          "For each slice, log one dependency risk and one mitigation plan before sprint commitment."
+        ],
+        completionChecklist: [
+          "Each split delivers standalone value",
+          "No split is purely technical-layer based",
+          "Dependencies are visible and actionable",
+          "Risks include mitigation or workaround",
+          "Story order supports incremental rollout"
+        ]
+      }
+    },
+    {
+      id: "m4",
+      title: "Module 4: Practical Examples",
+      duration: "15 min",
+      topics: ["Weak-to-strong epics", "Weak-to-strong stories", "Real antecedent risks", "Trainer scoring rubric"],
+      keyIdea: "Compare real examples from your domain to internalize the differences and practice scoring.",
+      trainingContent: {
+        learningGoals: [
+          "Apply rubrics consistently to epics and stories",
+          "Diagnose weak drafts quickly and prioritize fixes",
+          "Produce training-ready examples for peer calibration"
+        ],
+        coreConcepts: [
+          "Calibration improves quality across teams",
+          "Scoring highlights which fixes create the largest impact",
+          "Examples are most useful when they include rationale"
+        ],
+        advancedConcepts: [
+          "Use dual-pass review: first pass for business clarity, second pass for delivery and test readiness",
+          "Track rewrite uplift quantitatively to improve coaching effectiveness",
+          "Maintain a reusable pattern library of weak-to-strong transformations by domain"
+        ],
+        framework: [
+          "Score each draft 1-5 on clarity, measurability, scope, and testability",
+          "Prioritize fixes in order: persona clarity -> measurable outcome -> scope boundary -> acceptance criteria"
+        ],
+        weakExample: [
+          "Workshop input from delegates: 'As an admin, improve reliability and make approvals easier for everyone.'",
+          "Review panel disagreement occurred because each reviewer interpreted 'reliability' differently."
+        ],
+        strongExample: [
+          "Epic rewrite: For approval delegates handling baseline requests, reduce approval turnaround from 46 hours to 12 hours by Q3 by introducing SLA-priority work queues and breach alerts.",
+          "Story rewrite: As an approval delegate, I can filter pending requests by SLA breach risk and business criticality so I can process urgent requests first with auditable rationale."
+        ],
+        whatWasFixed: [
+          "Separated epic and story concerns",
+          "Added clear persona and workflow context",
+          "Made outcome measurable with baseline and target",
+          "Connected feature behavior to operational value"
+        ],
+        realWorldScenario: {
+          title: "Cross-Team Calibration Session",
+          background: [
+            "Three delivery teams submitted epics for a shared baseline modernization objective.",
+            "Initial rubric scoring variance across trainers was 2.1 points, showing inconsistent standards.",
+            "Leadership requested a repeatable calibration method before PI commitment."
+          ],
+          weakDraft: "Epic candidate: 'Streamline onboarding and improve baseline reliability for all teams using automation and dashboarding.'",
+          issues: [
+            "No user segment and no explicit business outcome",
+            "Combines workflow, automation, and reporting in one uncontrolled scope",
+            "No measurable completion signal for leadership"
+          ],
+          improvedEpic: "For process delegates in high-volume business units, reduce onboarding-related baseline defects from 14% to 4% and shorten approval turnaround from 46h to 16h by 30-Sep-2026 through validation-first submission and SLA-based approval prioritization.",
+          splitStories: [
+            {
+              title: "Defect-prevention validation pack",
+              rationale: "Targets highest defect source before approval step begins.",
+              acceptanceCriteria: [
+                "Block submission when required policy fields are missing and provide corrective guidance.",
+                "Log a defect-risk score at successful submission to support reporting and coaching.",
+                "Apply the latest validation rules to new requests without requiring a page reload."
+              ]
+            },
+            {
+              title: "SLA-priority approver worklist",
+              rationale: "Directly addresses approval delay and queue aging.",
+              acceptanceCriteria: [
+                "Order worklist items by SLA breach risk and business criticality to improve triage quality.",
+                "Send automated alerts to the primary and backup approver when a request reaches 80% of SLA while still pending.",
+                "Record actor, timestamp, and reason code in the audit log when approval status changes."
+              ]
+            }
+          ],
+          operatingMetrics: [
+            "Rubric score variance across reviewers",
+            "Defect rate before and after rewrite",
+            "Approval queue aging buckets (0-12h, 12-24h, 24h+)",
+            "Percent of stories accepted without rework in sprint planning"
+          ]
+        },
+        practiceExercise: [
+          "Run a two-pass peer review on two active epics from your team.",
+          "Capture baseline rubric scores, perform rewrite, and capture uplift scores.",
+          "Publish one calibration note describing why specific rewrite changes improved score."
+        ],
+        completionChecklist: [
+          "Rubric scores documented before and after rewrite",
+          "Top three quality gaps identified",
+          "Rewritten versions include measurable outcomes",
+          "Acceptance criteria are test-ready",
+          "Final drafts reviewed by another delegate"
+        ]
+      }
+    }
+  ],
+
+  assessmentQuestions: [
+    {
+      id: "a-01",
+      type: "single",
+      category: "Epic Foundations",
+      question: "Which epic statement best demonstrates a business outcome?",
+      options: [
+        "Build a mobile app for CRM access",
+        "Reduce Dynamics baseline request cycle time from 5 days to 1 day, increasing new-hire productivity",
+        "Implement CRM improvements",
+        "Add offline capability to the platform"
+      ],
+      answer: 1,
+      explanation: "The correct answer includes: WHO (new hires), WHAT metric (cycle time 5→1 day), and WHY (productivity). It's measurable and outcome-focused, not feature-focused."
+    },
+    {
+      id: "a-02",
+      type: "single",
+      category: "Epic Foundations",
+      question: "An epic states: 'As the organization, we want to improve user adoption.' What is missing?",
+      options: [
+        "Clear acceptance criteria",
+        "Measurable business metric tied to a specific outcome",
+        "Architecture decision",
+        "Technology stack"
+      ],
+      answer: 1,
+      explanation: "'Improve' is vague. A strong epic would say: 'Increase baseline onboarding adoption from 60% to 85% by integrating SSO, measured by active user count within 90 days.'"
+    },
+    {
+      id: "a-03",
+      type: "single",
+      category: "Story Essentials",
+      question: "Which story is most likely to be completed in ONE iteration?",
+      options: [
+        "As a field manager, I want to submit my team's baseline role assignments to CRM so we can track resource allocation",
+        "As a user, I want the system to be mobile-friendly",
+        "As a platform owner, I want to improve performance",
+        "As an admin, I want all CRM features to work better"
+      ],
+      answer: 0,
+      explanation: "Only option A is specific: one persona (field manager), one action (submit baseline), one outcome (track allocation). It's bounded and testable in one sprint."
+    },
+    {
+      id: "a-04",
+      type: "single",
+      category: "Story Essentials",
+      question: "A story says: 'Implement request approval workflow.' Why is this weak?",
+      options: [
+        "It's too small",
+        "It's a feature list, not a persona-driven outcome; it lacks testable acceptance criteria",
+        "It doesn't mention budget",
+        "The timeline is missing"
+      ],
+      answer: 1,
+      explanation: "Strong story: 'As an approval delegate, I submit a baseline request and see real-time approval status so I know when to take next action.' It's specific, testable, and measurable."
+    },
+    {
+      id: "a-05",
+      type: "multi",
+      category: "Story Essentials",
+      question: "Select all INVEST story traits:",
+      options: [
+        "Specific persona and one concrete action",
+        "Clear business value and testable acceptance criteria",
+        "Estimated and independent (can be reordered)",
+        "Must include all technical details and database schema",
+        "Small enough to complete in one iteration"
+      ],
+      answer: [0, 1, 2, 4],
+      explanation: "INVEST = Independent, Negotiable, Valuable, Estimable, Small, Testable. Option D violates 'Negotiable'—it over-specifies instead of negotiating implementation."
+    },
+    {
+      id: "a-06",
+      type: "single",
+      category: "Story Splitting",
+      question: "How should a large story 'Field manager manages team baseline across three regions' FIRST be split?",
+      options: [
+        "By technical layer: UI, API, database",
+        "By persona role: field manager, admin, approver",
+        "By workflow step: view team, assign role, submit baseline, track approval",
+        "By estimated hours: 10-hour stories vs 20-hour stories"
+      ],
+      answer: 2,
+      explanation: "Split by workflow step first (each is valuable independently). Splitting by technical layer creates dependencies and blocks delivery. Splitting by role/hours is secondary."
+    },
+    {
+      id: "a-07",
+      type: "single",
+      category: "Anti-patterns",
+      question: "An epic titled 'Modernize CRM' bundles: SSO, mobile UI, performance, and API redesign. What risk does this create?",
+      options: [
+        "It's too big to measure business outcome",
+        "It blocks learning because all dependencies must complete before any value",
+        "It violates story independence and creates bottlenecks",
+        "All of the above"
+      ],
+      answer: 3,
+      explanation: "All correct. Bundled epics have undefined outcomes, hidden dependencies, and block teams. Split by business outcome: 'Reduce sign-in time to <5s' is a separate epic from 'Enable field team mobile baseline access.'"
+    },
+    {
+      id: "a-08",
+      type: "single",
+      category: "Anti-patterns",
+      question: "A story says: 'Handle edge cases gracefully.' Why is this anti-pattern?",
+      options: [
+        "It's too technical",
+        "It's vague and not testable—'edge cases' and 'gracefully' are undefined",
+        "It requires too much time",
+        "It doesn't mention the persona"
+      ],
+      answer: 1,
+      explanation: "Strong story: 'When a user submits a duplicate request, the system displays an error message suggesting the approval workflow for the original request.' Specific, testable, persona-driven."
+    },
+    {
+      id: "a-09",
+      type: "single",
+      category: "Acceptance Criteria",
+      question: "Which acceptance criterion is testable WITHOUT ambiguity?",
+      options: [
+        "The system should be user-friendly",
+        "The request must be processed quickly",
+        "On submission, validate form data and show errors in under 500ms",
+        "The solution should follow best practices"
+      ],
+      answer: 2,
+      explanation: "Option C is testable: validate can be demonstrated, errors are observable, <500ms is measurable. Options A, B, D use vague terms (user-friendly, quickly, best practices)."
+    },
+    {
+      id: "a-10",
+      type: "multi",
+      category: "Epic Foundations",
+      question: "Select all traits of a strong epic:",
+      options: [
+        "Measurable business outcome with clear success metric",
+        "Specific persona (or user segment) who benefits",
+        "Defined scope boundaries and out-of-scope items",
+        "A list of all technical tasks and development steps",
+        "Story-splitting roadmap showing independent workflow steps",
+        "Estimated effort in person-months"
+      ],
+      answer: [0, 1, 2, 4],
+      explanation: "Strong epics clarify business outcome, persona, scope, and story structure. Option D (technical tasks) belongs in stories, not epics. Option F (effort) is estimated per story, not epic."
+    },
+    {
+      id: "a-11",
+      type: "single",
+      category: "Story Essentials",
+      question: "A weak story: 'Improve the request form UX.' A strong alternative is:",
+      options: [
+        "Redesign the request form with modern UI",
+        "As a first-time user, I can submit a baseline request in under 5 minutes without calling support, measured by form completion time",
+        "Make the form responsive",
+        "Add validation to the form"
+      ],
+      answer: 1,
+      explanation: "Strong story: specific persona, measurable outcome (5 min, no support calls), testable. Options A, C, D are vague features, not outcomes."
+    },
+    {
+      id: "a-12",
+      type: "single",
+      category: "Story Splitting",
+      question: "When should a story reference a dependency (e.g., 'awaits identity service integration')? In the story or elsewhere?",
+      options: [
+        "In the story title",
+        "Not at all—stories should be independent",
+        "In acceptance criteria as a known risk/blocker with a workaround",
+        "In the epic, not the story"
+      ],
+      answer: 2,
+      explanation: "Transparency matters: 'This story is blocked if identity service isn't available; workaround: use local auth.' Hides nothing, enables team planning."
+    },
+    {
+      id: "a-13",
+      type: "single",
+      category: "Anti-patterns",
+      question: "An epic includes: 'Update all legacy integrations.' Why is this weak?",
+      options: [
+        "It's too small",
+        "It lacks business outcome and scope—which integrations? What outcome? By when?",
+        "It doesn't mention personas",
+        "It's too technical"
+      ],
+      answer: 1,
+      explanation: "Strong: 'Migrate CRM integrations to Event Hub by Q3, reducing manual sync failures from 5/week to 0, improving billing accuracy from 94% to 99%.'"
+    },
+    {
+      id: "a-14",
+      type: "single",
+      category: "Acceptance Criteria",
+      question: "Which acceptance criterion best enables a QA engineer to test independently?",
+      options: [
+        "The system should handle errors well",
+        "On duplicate request submission, return HTTP 409 and display 'Request already pending'.",
+        "The feature should be robust",
+        "All scenarios should work"
+      ],
+      answer: 1,
+      explanation: "Option B is testable because it defines a specific trigger, HTTP response, and observable user message."
+    },
+    {
+      id: "a-15",
+      type: "multi",
+      category: "Epic Foundations",
+      question: "Select all anti-patterns to AVOID when writing an epic:",
+      options: [
+        "Bundling unrelated outcomes (e.g., 'modernize all things')",
+        "Vague business metrics ('improve user satisfaction')",
+        "Missing scope boundaries",
+        "Including detailed technical implementation in the epic",
+        "Defining story-by-story splitting strategy upfront",
+        "One epic per business outcome, not one per team"
+      ],
+      answer: [0, 1, 2, 3],
+      explanation: "Avoid 0-3. Story-by-story strategy (4) is good planning. One epic per outcome (6) is ideal. Epics should clarify intent, not prescribe implementation."
+    }
+  ],
+
+  practicalPrompts: [
+    "Rewrite a weak epic into a strong epic with measurable outcomes, persona clarity, and scope boundaries.",
+    "Create 3 to 5 stories from your epic with INVEST criteria and testable acceptance criteria.",
+    "Identify at least 2 advanced anti-pattern risks in the weak epic and propose specific mitigations."
+  ],
+
+  epicRubric: [
+    "Problem clarity (what need is addressed?)",
+    "Persona and impact clarity (who benefits? by how much?)",
+    "Scope and boundaries (what's included/excluded?)",
+    "Outcome measurability (how do we know it worked?)",
+    "Story-splitting readiness (are stories independent?)"
+  ],
+
+  storyRubric: [
+    "Scope size (completable in one iteration?)",
+    "Persona/action/value quality (one clear outcome?)",
+    "Acceptance criteria quality (testable without ambiguity?)",
+    "Dependency transparency (risks flagged?)",
+    "Operational readiness (can ops deploy and support it?)"
+  ]
+};
+</script>
+  <script>
+function byId(id) {
+  return document.getElementById(id);
+}
+
+const SYNC_SETTINGS_KEY = 'training.syncSettings';
+let activeModuleIndex = 0;
+
+function safeParse(jsonText, fallback) {
+  try {
+    return JSON.parse(jsonText);
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function setActiveTab(targetId) {
+  document.querySelectorAll('.tabs button').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.target === targetId);
+  });
+  document.querySelectorAll('.panel').forEach((panel) => {
+    panel.classList.toggle('active', panel.id === targetId);
+  });
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderStringList(items) {
+  if (!Array.isArray(items) || items.length === 0) return '<p>-</p>';
+  return '<ul>' + items.map((item) => '<li>' + escapeHtml(item) + '</li>').join('') + '</ul>';
+}
+
+function renderTextBlock(value) {
+  if (Array.isArray(value) && value.length) {
+    return value.map((line) => '<p>' + escapeHtml(line) + '</p>').join('');
+  }
+  return '<p>' + escapeHtml(value || '-') + '</p>';
+}
+
+function renderSplitStories(stories) {
+  if (!Array.isArray(stories) || stories.length === 0) return '<p>-</p>';
+  return stories.map((story, idx) => {
+    const title = escapeHtml(story.title || 'Story ' + (idx + 1));
+    const rationale = escapeHtml(story.rationale || '-');
+    const acceptance = renderStringList(story.acceptanceCriteria || []);
+    return (
+      '<div class="scenario-story">' +
+        '<h5>Story ' + (idx + 1) + ': ' + title + '</h5>' +
+        '<p><strong>Why this slice:</strong> ' + rationale + '</p>' +
+        '<p><strong>Acceptance Criteria</strong></p>' +
+        acceptance +
+      '</div>'
+    );
+  }).join('');
+}
+
+function renderRealWorldScenario(scenario) {
+  if (!scenario) return '<p>-</p>';
+
+  const title = escapeHtml(scenario.title || 'Scenario');
+  const background = renderStringList(scenario.background || []);
+  const weakDraft = escapeHtml(scenario.weakDraft || '-');
+  const issues = renderStringList(scenario.issues || []);
+  const improvedEpic = escapeHtml(scenario.improvedEpic || '-');
+  const splitStories = renderSplitStories(scenario.splitStories || []);
+  const operatingMetrics = renderStringList(scenario.operatingMetrics || []);
+
+  return (
+    '<article class="scenario-block">' +
+      '<h5>' + title + '</h5>' +
+      '<p><strong>Background</strong></p>' +
+      background +
+      '<p><strong>Weak Draft From Backlog</strong></p>' +
+      '<p>' + weakDraft + '</p>' +
+      '<p><strong>Why It Fails</strong></p>' +
+      issues +
+      '<p><strong>Improved Epic</strong></p>' +
+      '<p>' + improvedEpic + '</p>' +
+      '<p><strong>Split Stories For Delivery</strong></p>' +
+      splitStories +
+      '<p><strong>Operational Metrics To Track</strong></p>' +
+      operatingMetrics +
+    '</article>'
+  );
+}
+
+// === OVERVIEW TAB ===
+function renderTrainingOverview() {
+  const overview = TRAINING_DATA.trainingOverview;
+  byId('trainingFocus').textContent = overview.focus;
+  byId('expectedOutcome').textContent = overview.expectedOutcome;
+  
+  const objList = byId('objectivesList');
+  objList.innerHTML = '';
+  overview.objectives.forEach((obj) => {
+    const li = document.createElement('li');
+    li.textContent = obj;
+    objList.appendChild(li);
+  });
+}
+
+// === MODULES TAB ===
+function renderLearningModules() {
+  const grid = byId('modulesGrid');
+  grid.innerHTML = '';
+  
+  TRAINING_DATA.trainingModules.forEach((mod) => {
+    const card = document.createElement('div');
+    card.className = 'module-card';
+    
+    const h4 = document.createElement('h4');
+    h4.textContent = mod.title;
+    card.appendChild(h4);
+    
+    const dur = document.createElement('div');
+    dur.className = 'duration';
+    dur.textContent = '⏱️ ' + mod.duration;
+    card.appendChild(dur);
+    
+    const topics = document.createElement('ul');
+    mod.topics.forEach((t) => {
+      const li = document.createElement('li');
+      li.textContent = t;
+      topics.appendChild(li);
+    });
+    card.appendChild(topics);
+    
+    const idea = document.createElement('div');
+    idea.className = 'key-idea';
+    idea.innerHTML = '<strong>💡 Key Idea:</strong> ' + mod.keyIdea;
+    card.appendChild(idea);
+
+    const openBtn = document.createElement('button');
+    openBtn.type = 'button';
+    openBtn.className = 'module-open-btn';
+    openBtn.dataset.moduleId = mod.id;
+    openBtn.textContent = 'Open Module';
+    card.appendChild(openBtn);
+    
+    grid.appendChild(card);
+  });
+
+  renderActiveModule();
+}
+
+function renderActiveModule() {
+  const modules = TRAINING_DATA.trainingModules;
+  if (!modules.length) return;
+
+  if (activeModuleIndex < 0) activeModuleIndex = 0;
+  if (activeModuleIndex >= modules.length) activeModuleIndex = modules.length - 1;
+
+  const mod = modules[activeModuleIndex];
+  const content = mod.trainingContent || {};
+  byId('moduleViewerTitle').textContent = mod.title;
+  byId('moduleViewerMeta').textContent = 'Duration: ' + mod.duration + ' | ' + (activeModuleIndex + 1) + ' of ' + modules.length;
+  byId('moduleViewerBody').innerHTML =
+    '<p><strong>Topics covered:</strong></p>' +
+    renderStringList(mod.topics) +
+    '<div class="key-idea"><strong>Key Idea:</strong> ' + escapeHtml(mod.keyIdea) + '</div>' +
+    '<h4>Learning Goals</h4>' +
+    renderStringList(content.learningGoals) +
+    '<h4>Core Concepts</h4>' +
+    renderStringList(content.coreConcepts) +
+    '<h4>Advanced Concepts</h4>' +
+    renderStringList(content.advancedConcepts) +
+    '<h4>Framework</h4>' +
+    renderStringList(content.framework) +
+    '<h4>Weak Example</h4>' +
+    renderTextBlock(content.weakExample) +
+    '<h4>Strong Example</h4>' +
+    renderTextBlock(content.strongExample) +
+    '<h4>What Was Fixed</h4>' +
+    renderStringList(content.whatWasFixed) +
+    '<h4>Real-World Scenario Lab</h4>' +
+    renderRealWorldScenario(content.realWorldScenario) +
+    '<h4>Practice Exercise</h4>' +
+    renderTextBlock(content.practiceExercise) +
+    '<h4>Completion Checklist</h4>' +
+    renderStringList(content.completionChecklist);
+
+  byId('prevModuleBtn').disabled = activeModuleIndex === 0;
+  byId('nextModuleBtn').disabled = activeModuleIndex === modules.length - 1;
+
+  byId('modulesGrid').querySelectorAll('.module-card').forEach((card, idx) => {
+    card.classList.toggle('active', idx === activeModuleIndex);
+  });
+}
+
+// === ASSESSMENT TAB ===
+function renderAssessmentQuestions() {
+  const form = byId('assessmentForm');
+  form.innerHTML = '';
+  
+  TRAINING_DATA.assessmentQuestions.forEach((q, qi) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'q';
+    
+    const titleEl = document.createElement('p');
+    titleEl.innerHTML = (qi + 1) + '. <strong>' + q.question + '</strong>';
+    const catTag = document.createElement('span');
+    catTag.style.fontSize = '12px';
+    catTag.style.color = '#999';
+    catTag.style.marginLeft = '10px';
+    catTag.textContent = '[' + q.category + ']';
+    titleEl.appendChild(catTag);
+    wrap.appendChild(titleEl);
+    
+    q.options.forEach((opt, oi) => {
+      const line = document.createElement('label');
+      line.className = 'opt';
+      
+      const input = document.createElement('input');
+      input.type = q.type === 'multi' ? 'checkbox' : 'radio';
+      input.name = 'q-' + q.id;
+      input.value = String(oi);
+      
+      const span = document.createElement('span');
+      span.textContent = opt;
+      
+      line.appendChild(input);
+      line.appendChild(span);
+      wrap.appendChild(line);
+    });
+    
+    form.appendChild(wrap);
+  });
+}
+
+function parseAssessment() {
+  const form = byId('assessmentForm');
+  let score = 0;
+  const categoryScores = {};
+  
+  TRAINING_DATA.assessmentQuestions.forEach((q) => {
+    const name = 'q-' + q.id;
+    const picked = Array.from(form.querySelectorAll('input[name="' + name + '"]:checked')).map((el) => Number(el.value));
+    
+    const cat = q.category;
+    if (!categoryScores[cat]) categoryScores[cat] = { correct: 0, total: 0 };
+    categoryScores[cat].total += 1;
+    
+    if (q.type === 'single') {
+      if (picked.length === 1 && picked[0] === q.answer) {
+        score += 1;
+        categoryScores[cat].correct += 1;
+      }
+    } else {
+      const right = [...q.answer].sort((a, b) => a - b);
+      const got = [...picked].sort((a, b) => a - b);
+      if (JSON.stringify(right) === JSON.stringify(got)) {
+        score += 1;
+        categoryScores[cat].correct += 1;
+      }
+    }
+  });
+  
+  return {
+    score: score,
+    total: TRAINING_DATA.assessmentQuestions.length,
+    percent: Math.round((score / TRAINING_DATA.assessmentQuestions.length) * 100),
+    categoryScores: categoryScores
+  };
+}
+
+function showResult(el, text, pass) {
+  el.textContent = text;
+  el.classList.remove('ok', 'bad');
+  el.classList.add(pass ? 'ok' : 'bad');
+}
+
+function getTraineeProfile() {
+  return {
+    traineeName: byId('traineeName').value.trim(),
+    trainerName: byId('trainerName').value.trim(),
+    teamName: byId('teamName').value.trim()
+  };
+}
+
+// === SYNC SETTINGS ===
+function getSyncSettings() {
+  const settings = safeParse(
+    localStorage.getItem(SYNC_SETTINGS_KEY) || 'null',
+    { webhookUrl: '', autoEnabled: false }
+  );
+  return settings || { webhookUrl: '', autoEnabled: false };
+}
+
+function setSyncSettings(settings) {
+  localStorage.setItem(SYNC_SETTINGS_KEY, JSON.stringify(settings));
+}
+
+function readSyncSettingsFromForm() {
+  return {
+    webhookUrl: byId('syncWebhookUrl').value.trim(),
+    autoEnabled: byId('syncAutoEnabled').checked
+  };
+}
+
+function loadSyncSettingsToForm() {
+  const settings = getSyncSettings();
+  byId('syncWebhookUrl').value = settings.webhookUrl || '';
+  byId('syncAutoEnabled').checked = !!settings.autoEnabled;
+}
+
+async function postWithTimeout(url, payload, timeoutMs) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: ctrl.signal
+    });
+    return res;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function syncRecordToM365(record, mode) {
+  const settings = getSyncSettings();
+  if (!settings.webhookUrl) {
+    return { ok: false, reason: 'Webhook URL not configured' };
+  }
+
+  try {
+    const payload = {
+      date: record.date,
+      traineeName: record.traineeName,
+      trainerName: record.trainerName,
+      teamName: record.teamName,
+      assessmentScore: record.assessmentScore,
+      status: record.status,
+      mode: mode,
+      sentAt: new Date().toISOString()
+    };
+
+    const res = await postWithTimeout(settings.webhookUrl, payload, 15000);
+    if (res && res.ok) {
+      return { ok: true };
+    } else {
+      return { ok: false, reason: res ? 'HTTP ' + res.status : 'Network error' };
+    }
+  } catch (e) {
+    return { ok: false, reason: e.message };
+  }
+}
+
+// === EVENT HANDLERS ===
+function initTabs() {
+  byId('tabs').querySelectorAll('button').forEach((btn) => {
+    btn.addEventListener('click', () => setActiveTab(btn.dataset.target));
+  });
+}
+
+function initAssessmentActions() {
+  byId('assessmentSubmit').addEventListener('click', () => {
+    const result = parseAssessment();
+    const pass = result.percent >= 75;
+
+    showResult(byId('assessmentResult'), 
+      'Score: ' + result.score + '/' + result.total + ' (' + result.percent + '%) - ' + (pass ? 'PASS ✓' : 'NEEDS IMPROVEMENT'), 
+      pass);
+
+    const profile = getTraineeProfile();
+    const settings = getSyncSettings();
+    if (settings.autoEnabled && settings.webhookUrl && profile.traineeName && pass) {
+      const payload = {
+        date: new Date().toISOString().slice(0, 10),
+        traineeName: profile.traineeName,
+        trainerName: profile.trainerName,
+        teamName: profile.teamName,
+        assessmentScore: result.percent,
+        status: 'PASS'
+      };
+      syncRecordToM365(payload, 'assessment-auto');
+    }
+  });
+}
+
+function initModuleActions() {
+  byId('modulesGrid').addEventListener('click', (ev) => {
+    const btn = ev.target.closest('button[data-module-id]');
+    if (!btn) return;
+
+    const idx = TRAINING_DATA.trainingModules.findIndex((m) => m.id === btn.dataset.moduleId);
+    if (idx === -1) return;
+
+    activeModuleIndex = idx;
+    renderActiveModule();
+
+    const viewer = byId('moduleViewer');
+    if (viewer) {
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  byId('prevModuleBtn').addEventListener('click', () => {
+    if (activeModuleIndex > 0) {
+      activeModuleIndex -= 1;
+      renderActiveModule();
+    }
+  });
+
+  byId('nextModuleBtn').addEventListener('click', () => {
+    if (activeModuleIndex < TRAINING_DATA.trainingModules.length - 1) {
+      activeModuleIndex += 1;
+      renderActiveModule();
+    }
+  });
+}
+
+function initSyncSettingsActions() {
+  byId('saveSyncSettings').addEventListener('click', () => {
+    const settings = readSyncSettingsFromForm();
+    if (settings.autoEnabled && !settings.webhookUrl) {
+      showResult(byId('syncSettingsResult'), 'Provide webhook URL when auto-sync is enabled.', false);
+      return;
+    }
+    setSyncSettings(settings);
+    showResult(byId('syncSettingsResult'), 'Sync settings saved.', true);
+  });
+
+  byId('testSyncSettings').addEventListener('click', async () => {
+    const settings = readSyncSettingsFromForm();
+    if (!settings.webhookUrl) {
+      showResult(byId('syncSettingsResult'), 'Provide webhook URL first.', false);
+      return;
+    }
+
+    setSyncSettings(settings);
+    const testPayload = {
+      date: new Date().toISOString().slice(0, 10),
+      traineeName: 'Connection Test',
+      trainerName: getTraineeProfile().trainerName || 'Trainer',
+      teamName: getTraineeProfile().teamName || 'Test Team',
+      assessmentScore: 100,
+      status: 'TEST'
+    };
+
+    const syncRes = await syncRecordToM365(testPayload, 'connection-test');
+    if (syncRes.ok) {
+      showResult(byId('syncSettingsResult'), 'Connection test successful. ✓', true);
+    } else {
+      showResult(byId('syncSettingsResult'), 'Connection failed: ' + syncRes.reason, false);
+    }
+  });
+}
+
+function init() {
+  initTabs();
+  loadSyncSettingsToForm();
+  renderTrainingOverview();
+  renderLearningModules();
+  initModuleActions();
+  renderAssessmentQuestions();
+  initAssessmentActions();
+  initSyncSettingsActions();
+}
+
+init();
+
+</script>
+</body>
+</html>

@@ -129,6 +129,11 @@ input[type="text"] {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
+#overview .card + .card,
+#materials .card + .card {
+  margin-top: 16px;
+}
+
 .card h3 { margin-top: 0; }
 
 .quiz {
@@ -155,6 +160,56 @@ input[type="text"] {
   margin-bottom: 7px;
 }
 
+#assessment .q {
+  padding: 16px 18px;
+}
+
+#assessment .q p {
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+#assessment .opt {
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border: 1px solid #d9cfbc;
+  border-radius: 6px;
+  background: #fffdf8;
+  cursor: pointer;
+}
+
+#assessment .opt span {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#assessment .opt input {
+  margin-top: 3px;
+  transform: scale(1.15);
+}
+
+#assessment .opt:hover {
+  background: #f8f3e7;
+}
+
+#assessment .opt.correct-opt {
+  border-color: #9bc9bc;
+  background: #eef7f4;
+}
+
+.answer-key {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-left: 4px solid var(--good);
+  border-radius: 4px;
+  background: #eef7f4;
+  color: #1f3f39;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
 .actions {
   margin-top: 14px;
 }
@@ -171,29 +226,73 @@ button {
 
 .actions button { margin-right: 8px; margin-bottom: 6px; }
 
-#saveSyncSettings,
-#testSyncSettings {
-  background: #365fc2;
+#showCorrectAnswers {
+  background: #6b7c74;
 }
 
-.check-inline {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+#showCorrectAnswers:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.check-inline label {
-  margin: 0;
-}
+
 
 
 .result {
-  margin-top: 10px;
+  margin-top: 12px;
   font-weight: 700;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  opacity: 0;
+  transform: translateY(6px) scale(0.99);
 }
 
-.result.ok { color: #7ddfbf; }
-.result.bad { color: #ffb8a9; }
+.result.show {
+  opacity: 1;
+  animation: resultReveal 420ms ease-out;
+}
+
+.result.ok {
+  color: #1f7a6c;
+  background: #eaf6f2;
+  border-color: #b9ddd2;
+}
+
+.result.bad {
+  color: #9a3c2f;
+  background: #fff1ec;
+  border-color: #e6c1b8;
+}
+
+.result.ok.show {
+  animation: resultReveal 420ms ease-out, resultPulseGood 900ms ease-out;
+}
+
+.result.bad.show {
+  animation: resultReveal 420ms ease-out, resultPulseBad 900ms ease-out;
+}
+
+@keyframes resultReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes resultPulseGood {
+  0% { box-shadow: 0 0 0 0 rgba(31, 122, 108, 0.35); }
+  100% { box-shadow: 0 0 0 14px rgba(31, 122, 108, 0); }
+}
+
+@keyframes resultPulseBad {
+  0% { box-shadow: 0 0 0 0 rgba(154, 60, 47, 0.30); }
+  100% { box-shadow: 0 0 0 14px rgba(154, 60, 47, 0); }
+}
 
 .r-line {
   display: flex;
@@ -275,47 +374,6 @@ ol, ul { line-height: 1.5; }
       <article class="card">
         <h3>Learning Objectives</h3>
         <ul class="objectives-list" id="objectivesList"></ul>
-      </article>
-
-      <article class="card">
-        <h3>Expected Outcome</h3>
-        <p id="expectedOutcome"></p>
-      </article>
-
-      <article class="card">
-        <h3>Your Profile</h3>
-        <div class="three-col" id="traineeFields">
-          <div>
-            <label for="traineeName">Your Name</label>
-            <input id="traineeName" type="text" placeholder="Enter your name" />
-          </div>
-          <div>
-            <label for="trainerName">Trainer Name</label>
-            <input id="trainerName" type="text" placeholder="Enter trainer name" />
-          </div>
-          <div>
-            <label for="teamName">Team / Function</label>
-            <input id="teamName" type="text" placeholder="Enter team" />
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>M365 Sync Settings</h3>
-        <p class="small">Optional: send completed records to SharePoint through a Power Automate HTTP webhook.</p>
-        <div>
-          <label for="syncWebhookUrl">Power Automate Webhook URL</label>
-          <input id="syncWebhookUrl" type="text" placeholder="https://prod-xx.westeurope.logic.azure.com/..." />
-        </div>
-        <div class="check-inline" style="margin-top:10px;">
-          <input id="syncAutoEnabled" type="checkbox" />
-          <label for="syncAutoEnabled">Auto-sync records to M365 when completing assessment</label>
-        </div>
-        <div class="actions">
-          <button id="saveSyncSettings" type="button">Save Sync Settings</button>
-          <button id="testSyncSettings" type="button">Test Sync Connection</button>
-        </div>
-        <p id="syncSettingsResult" class="result"></p>
       </article>
     </section>
 
@@ -415,6 +473,7 @@ ol, ul { line-height: 1.5; }
 
       <div class="actions">
         <button id="assessmentSubmit" type="button">Score Assessment</button>
+        <button id="showCorrectAnswers" type="button" disabled>Correct Answers</button>
       </div>
       <p id="assessmentResult" class="result"></p>
 
@@ -430,16 +489,15 @@ ol, ul { line-height: 1.5; }
 const TRAINING_DATA = {
   trainingOverview: {
     title: "Process Delegate Epic & Story Writing",
-    focus: "Enable process delegates to write clear, measurable epics and user stories that drive aligned team delivery",
-    duration: "90 minutes",
+    focus: "Enable learners to write clear, measurable epics and user stories that drive aligned team delivery",
+    duration: "60 minutes",
     objectives: [
       "Distinguish weak from strong epics using measurable business outcomes and persona clarity",
       "Write stories with INVEST principles: Independent, Negotiable, Valuable, Estimable, Small, Testable",
       "Apply acceptance criteria that enable testing without ambiguity",
       "Identify and mitigate advanced anti-patterns in epic-story hierarchies",
       "Split large stories into independent, deliverable increments"
-    ],
-    expectedOutcome: "Trainees will pass a 15-question assessment (75%+) and score 3.5+ on practical epic/story evaluation"
+    ]
   },
 
   trainingModules: [
@@ -463,7 +521,7 @@ const TRAINING_DATA = {
         advancedConcepts: [
           "Use leading and lagging indicators together: leading metrics show adoption behavior, lagging metrics show business impact",
           "Define explicit kill criteria for epics that fail to move target metrics after rollout",
-          "Attach constraint assumptions (policy, data quality, identity readiness) to reduce delivery surprise"
+          "Attach constraint assumptions (policy, data quality, identity readiness) to reduce deliver0y surprise"
         ],
         framework: [
           "Epic formula: For <persona>, improve <metric> from <baseline> to <target> by <date> so that <business impact>",
@@ -1073,7 +1131,6 @@ function byId(id) {
   return document.getElementById(id);
 }
 
-const SYNC_SETTINGS_KEY = 'training.syncSettings';
 let activeModuleIndex = 0;
 
 function safeParse(jsonText, fallback) {
@@ -1165,7 +1222,6 @@ function renderRealWorldScenario(scenario) {
 function renderTrainingOverview() {
   const overview = TRAINING_DATA.trainingOverview;
   byId('trainingFocus').textContent = overview.focus;
-  byId('expectedOutcome').textContent = overview.expectedOutcome;
   
   const objList = byId('objectivesList');
   objList.innerHTML = '';
@@ -1342,87 +1398,45 @@ function parseAssessment() {
 
 function showResult(el, text, pass) {
   el.textContent = text;
-  el.classList.remove('ok', 'bad');
+  el.classList.remove('ok', 'bad', 'show');
+  void el.offsetWidth;
   el.classList.add(pass ? 'ok' : 'bad');
+  el.classList.add('show');
 }
 
-function getTraineeProfile() {
-  return {
-    traineeName: byId('traineeName').value.trim(),
-    trainerName: byId('trainerName').value.trim(),
-    teamName: byId('teamName').value.trim()
-  };
+function clearCorrectAnswers() {
+  byId('assessmentForm').querySelectorAll('.answer-key').forEach((el) => el.remove());
+  byId('assessmentForm').querySelectorAll('.opt').forEach((el) => el.classList.remove('correct-opt'));
 }
 
-// === SYNC SETTINGS ===
-function getSyncSettings() {
-  const settings = safeParse(
-    localStorage.getItem(SYNC_SETTINGS_KEY) || 'null',
-    { webhookUrl: '', autoEnabled: false }
-  );
-  return settings || { webhookUrl: '', autoEnabled: false };
+function formatCorrectAnswer(q) {
+  if (q.type === 'single') {
+    return 'Correct answer: ' + q.options[q.answer];
+  }
+
+  const answers = q.answer.map((idx) => q.options[idx]);
+  return 'Correct answers: ' + answers.join(' | ');
 }
 
-function setSyncSettings(settings) {
-  localStorage.setItem(SYNC_SETTINGS_KEY, JSON.stringify(settings));
-}
+function showCorrectAnswers() {
+  const questionEls = byId('assessmentForm').querySelectorAll('.q');
 
-function readSyncSettingsFromForm() {
-  return {
-    webhookUrl: byId('syncWebhookUrl').value.trim(),
-    autoEnabled: byId('syncAutoEnabled').checked
-  };
-}
+  TRAINING_DATA.assessmentQuestions.forEach((q, idx) => {
+    const wrap = questionEls[idx];
+    if (!wrap) return;
 
-function loadSyncSettingsToForm() {
-  const settings = getSyncSettings();
-  byId('syncWebhookUrl').value = settings.webhookUrl || '';
-  byId('syncAutoEnabled').checked = !!settings.autoEnabled;
-}
+    const answerText = document.createElement('div');
+    answerText.className = 'answer-key';
+    answerText.textContent = formatCorrectAnswer(q);
+    wrap.appendChild(answerText);
 
-async function postWithTimeout(url, payload, timeoutMs) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: ctrl.signal
+    const correctIndexes = Array.isArray(q.answer) ? q.answer : [q.answer];
+    wrap.querySelectorAll('.opt input').forEach((input) => {
+      if (correctIndexes.includes(Number(input.value))) {
+        input.closest('.opt').classList.add('correct-opt');
+      }
     });
-    return res;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-async function syncRecordToM365(record, mode) {
-  const settings = getSyncSettings();
-  if (!settings.webhookUrl) {
-    return { ok: false, reason: 'Webhook URL not configured' };
-  }
-
-  try {
-    const payload = {
-      date: record.date,
-      traineeName: record.traineeName,
-      trainerName: record.trainerName,
-      teamName: record.teamName,
-      assessmentScore: record.assessmentScore,
-      status: record.status,
-      mode: mode,
-      sentAt: new Date().toISOString()
-    };
-
-    const res = await postWithTimeout(settings.webhookUrl, payload, 15000);
-    if (res && res.ok) {
-      return { ok: true };
-    } else {
-      return { ok: false, reason: res ? 'HTTP ' + res.status : 'Network error' };
-    }
-  } catch (e) {
-    return { ok: false, reason: e.message };
-  }
+  });
 }
 
 // === EVENT HANDLERS ===
@@ -1433,7 +1447,16 @@ function initTabs() {
 }
 
 function initAssessmentActions() {
+  const answerBtn = byId('showCorrectAnswers');
+
+  answerBtn.addEventListener('click', () => {
+    clearCorrectAnswers();
+    showCorrectAnswers();
+  });
+
   byId('assessmentSubmit').addEventListener('click', () => {
+    clearCorrectAnswers();
+
     const result = parseAssessment();
     const pass = result.percent >= 75;
 
@@ -1441,19 +1464,7 @@ function initAssessmentActions() {
       'Score: ' + result.score + '/' + result.total + ' (' + result.percent + '%) - ' + (pass ? 'PASS ✓' : 'NEEDS IMPROVEMENT'), 
       pass);
 
-    const profile = getTraineeProfile();
-    const settings = getSyncSettings();
-    if (settings.autoEnabled && settings.webhookUrl && profile.traineeName && pass) {
-      const payload = {
-        date: new Date().toISOString().slice(0, 10),
-        traineeName: profile.traineeName,
-        trainerName: profile.trainerName,
-        teamName: profile.teamName,
-        assessmentScore: result.percent,
-        status: 'PASS'
-      };
-      syncRecordToM365(payload, 'assessment-auto');
-    }
+    answerBtn.disabled = false;
   });
 }
 
@@ -1489,52 +1500,13 @@ function initModuleActions() {
   });
 }
 
-function initSyncSettingsActions() {
-  byId('saveSyncSettings').addEventListener('click', () => {
-    const settings = readSyncSettingsFromForm();
-    if (settings.autoEnabled && !settings.webhookUrl) {
-      showResult(byId('syncSettingsResult'), 'Provide webhook URL when auto-sync is enabled.', false);
-      return;
-    }
-    setSyncSettings(settings);
-    showResult(byId('syncSettingsResult'), 'Sync settings saved.', true);
-  });
-
-  byId('testSyncSettings').addEventListener('click', async () => {
-    const settings = readSyncSettingsFromForm();
-    if (!settings.webhookUrl) {
-      showResult(byId('syncSettingsResult'), 'Provide webhook URL first.', false);
-      return;
-    }
-
-    setSyncSettings(settings);
-    const testPayload = {
-      date: new Date().toISOString().slice(0, 10),
-      traineeName: 'Connection Test',
-      trainerName: getTraineeProfile().trainerName || 'Trainer',
-      teamName: getTraineeProfile().teamName || 'Test Team',
-      assessmentScore: 100,
-      status: 'TEST'
-    };
-
-    const syncRes = await syncRecordToM365(testPayload, 'connection-test');
-    if (syncRes.ok) {
-      showResult(byId('syncSettingsResult'), 'Connection test successful. ✓', true);
-    } else {
-      showResult(byId('syncSettingsResult'), 'Connection failed: ' + syncRes.reason, false);
-    }
-  });
-}
-
 function init() {
   initTabs();
-  loadSyncSettingsToForm();
   renderTrainingOverview();
   renderLearningModules();
   initModuleActions();
   renderAssessmentQuestions();
   initAssessmentActions();
-  initSyncSettingsActions();
 }
 
 init();
